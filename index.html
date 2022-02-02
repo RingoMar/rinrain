@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=0.9, shrink-to-fit=no">
+	<link rel="stylesheet" href="../materialize/css/materialize.css" />
+
+	<script src="../materialize/js/materialize.js"></script>
+	<title>Ringo Rain Gauge</title>
+	<script>
+		var chart = null;
+		var dataPoints = [];
+		var dataPoints2 = [];
+
+		document.addEventListener('DOMContentLoaded', function () {
+			var elems = document.querySelectorAll('.materialboxed');
+			var instances = M.Materialbox.init(elems, options);
+		});
+		window.onload = function () {
+
+
+			chart = new CanvasJS.Chart("chartContainer", {
+				animationEnabled: true,
+				theme: "dark2",
+				title: {
+					text: "Weekly Rain Data",
+				},
+				axisY: {
+					title: "Volume (Inches)",
+					titleFontSize: 24,
+				},
+				data: [
+					{
+						type: "column",
+						yValueFormatString: "#,### Inches",
+						dataPoints: dataPoints,
+					},
+					{
+						type: "column",
+						yValueFormatString: "#,### Inches Cube",
+						dataPoints: dataPoints2,
+					},
+				],
+			});
+
+			$.getJSON("./data.json", callback);
+		};
+
+		function callback(data) {
+			for (var i = 0; i < data.dps.length; i++) {
+				dataPoints.push({
+					x: new Date(data.dps[i].date),
+					y: data.dps[i].units,
+				});
+				dataPoints2.push({
+					x: new Date(data.dps[i].date),
+					y: (Math.PI * 2.25**2 * data.dps[i].units),
+				});
+			}
+			chart.render();
+		}
+	</script>
+</head>
+
+<body class="grey darken-4" style="font-family: Helvetica, Arial,  sans-serif !important;">
+	<nav>
+		<div class="nav-wrapper grey darken-2">
+			<a href="#" class="brand-logo center">Ringo Rain Gauge</a>
+			<ul id="nav-mobile" class="left hide-on-med-and-down">
+				<li><a href="https://ringomar.github.io/">PROJECTS</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="row" style="padding: 20px">
+		<div class="col s12 m12 l5">
+			<p class="flow-text white-text">
+			<h1 class="blue-text darken-4">ABOUT</h1>
+			<h4 class="white-text">The main objective of this project is to keep a weekly recoding of the rains through out the dry season of 2022.
+				Also testing out a few theories on night chill and the soil moisture. Weeks start at every Woo Back Wednesday.<br>
+
+				Recording start: 22/1/27</h4>
+			<h1 class="blue-text darken-4">Gauge Statistics</h1>
+			<h5 class="white-text">
+				<ol style="list-style-type:circle;">
+					<ul> ► 4.5In Diameter </ul>
+					<ul> ► 5.8In Measure Offset</ul>
+					<ul> ► 5.2In Measurement Height</ul>
+					<ul> ► 41.8In Offset from floor</ul>
+				</ol>
+			</h5>
+
+			</h4>
+
+			</p>
+		</div>
+		<div class="col s12 m12 l7">
+			<div class="row s12 m12 l6">
+				<!-- <div class="col">
+				</div>
+				<div class="col s6">
+				</div> -->
+				<div class="row" style="    display: flex;    justify-content: space-evenly;">
+					<img class="materialboxed" data-caption="A picture of the real rain gauge" width="220"
+						src="img1.jpg" />
+					<img class="materialboxed" width="220" src="img3.jpg" />
+					<img class="materialboxed" width="220" src="img2.jpg" />
+				</div>
+			</div>
+			<div class="row s12">
+				<div id="chartContainer" style="height: auto; max-width: autopx; margin: 0px auto"></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+	<script src="canvasjs.min.js"></script>
+</body>
+
+</html>
