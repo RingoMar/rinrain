@@ -17,9 +17,11 @@
 		var dataPoints2 = [];
 
 		document.addEventListener('DOMContentLoaded', function () {
-			var elems = document.querySelectorAll('.materialboxed');
-			var instances = M.Materialbox.init(elems, options);
+			if(!document.documentMode) { // https://github.com/Dogfalo/materialize/issues/5801
+				M.Materialbox.init(document.querySelectorAll('.materialboxed'));
+			}
 		});
+
 		window.onload = function () {
 
 
@@ -106,8 +108,8 @@
 				<div class="row" style="    display: flex;    justify-content: space-evenly;">
 					<img class="materialboxed" data-caption="A picture of the real rain gauge" width="220"
 						src="img1.jpg" />
-					<img class="materialboxed" width="220" src="img3.jpg" />
-					<img class="materialboxed" width="220" src="img2.jpg" />
+					<img class="materialboxed" data-caption="Front view of the rain gauge" width="220" src="img3.jpg" />
+					<img class="materialboxed" data-caption="Close up view of scale and measurements" width="220" src="img2.jpg" />
 				</div>
 			</div>
 			<div class="row s12">
