@@ -67,3 +67,15 @@ p {
 .sidenavv {
   padding: 1rem;
 }
+
+@media (max-width: 480px) {
+  .sidenavv {
+    display: none !important;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .sidenavv {
+    display: none !important;
+  }
+}
