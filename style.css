@@ -28,7 +28,7 @@ body {
   padding: 4rem !important;
   -webkit-flex: 5 !important;
   flex: 5 !important;
-  height: 1300px !important;
+  height: 1400px !important;
 }
 
 h1 {
@@ -66,6 +66,20 @@ p {
 
 .sidenavv {
   padding: 1rem;
+}
+
+.box1 {
+  width: 20px;
+  height: 20px;
+  background-color: #6d78ad;
+  border: 1px solid black;
+}
+
+.box2 {
+  width: 20px;
+  height: 20px;
+  background-color: #51cda0;
+  border: 1px solid black;
 }
 
 @media (max-width: 480px) {
